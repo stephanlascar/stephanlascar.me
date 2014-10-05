@@ -9,6 +9,9 @@
       action: copy src=files/iptables_rules.v4 dest=/etc/iptables/rules.v4 owner=root group=root mode=0644
       notify: reload iptables-persistent
 
+    - name: install docker.io
+      action: apt name=docker.io
+
   handlers:
     - name: reload iptables-persistent
       service: name=iptables-persistent state=reloaded
