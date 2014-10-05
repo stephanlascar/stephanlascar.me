@@ -1,0 +1,14 @@
+- hosts: stephanlascar.me
+  sudo: yes
+
+  tasks:
+    - name: install iptables-persistent
+      action: apt name=iptables-persistent
+
+    - name: copy the iptables file rules
+      action: copy src=files/iptables_rules.v4 dest=/etc/iptables/rules.v4 owner=root group=root mode=0644
+      notify: reload iptables-persistent
+
+  handlers:
+    - name: reload iptables-persistent
+      service: name=iptables-persistent state=reloaded
