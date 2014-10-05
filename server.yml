@@ -12,6 +12,9 @@
     - name: install docker.io
       action: apt name=docker.io
 
+    - name: create nginx docker.io container
+      docker: image=nginx
+
   handlers:
     - name: reload iptables-persistent
       service: name=iptables-persistent state=reloaded
