@@ -41,4 +41,11 @@
 # Autoriser HTTP en entrée
 -A INPUT -p tcp --dport 80 -j ACCEPT
 
+# Autoriser 9091 (transmission)
+-A INPUT -p tcp --dport 9091 -j ACCEPT
+-A INPUT -p tcp --dport 51413 -j ACCEPT
+-A OUTPUT -p tcp --dport 51413 -j ACCEPT
+-A INPUT -p udp --dport 51413 -j ACCEPT
+-A OUTPUT -p udp --dport 51413 -j ACCEPT
+
 COMMIT

@@ -1,0 +1,20 @@
+- name: create transmission directory
+  file: path=/var/lib/transmission-daemon/{{ item.directory }} state=directory
+  with_items:
+    - { directory: 'info' }
+    - { directory: 'downloads/complete' }
+    - { directory: 'downloads/incomplete' }
+
+- name: copy transmission settings file
+  action: copy src=settings.json dest=/var/lib/transmission-daemon/info owner=root group=root mode=0644
+
+- name: install transmission docker.io container
+  command: docker pull cptactionhank/transmission
+
+- name: check transmission docker.io container status
+  shell: "docker ps -a | grep 'transmission' | cat"
+  register: transmission_container_status
+
+- name: start transmission docker.io container
+  command: docker run --name transmission -v /var/lib/transmission-daemon:/var/lib/transmission-daemon -d -p 9091:9091 -p 51413:51413 -p 51413:51413/udp cptactionhank/transmission
+  when: (transmission_container_status.stdout.find('Up ') == -1)
