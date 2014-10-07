@@ -1,0 +1,44 @@
+*filter
+
+# Vider les tables actuelles
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+# Ne pas casser les connexions etablies
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# Autoriser loopback
+-A INPUT -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+# ICMP (Ping)
+-A INPUT -p icmp -j ACCEPT
+-A OUTPUT -p icmp -j ACCEPT
+
+# SSH In
+-A INPUT -p tcp --dport 19820 -j ACCEPT
+
+# Autoriser FTP en sortie
+-A OUTPUT -p tcp -m tcp --dport 21 -j ACCEPT
+
+# Autoriser HTTP/HTTPS en sortie
+-A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
+-A OUTPUT -p tcp -m tcp --dport 443 -j ACCEPT
+
+# Autoriser DNS en sortie
+-A OUTPUT -p tcp -m tcp --dport 53 -j ACCEPT
+-A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
+
+# Autoriser NTP en sortie
+-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT
+
+# Forward vers et depuis Docker
+-A FORWARD -i docker0 -o eth0 -j ACCEPT
+-A FORWARD -i eth0 -o docker0 -j ACCEPT
+
+# Autoriser HTTP en entrée
+-A INPUT -p tcp --dport 80 -j ACCEPT
+
+COMMIT

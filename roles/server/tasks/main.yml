@@ -1,0 +1,6 @@
+- name: install iptables-persistent
+  action: apt name=iptables-persistent
+
+- name: copy the iptables file rules
+  action: copy src=iptables_rules.v4 dest=/etc/iptables/rules.v4 owner=root group=root mode=0644
+  notify: reload iptables-persistent
