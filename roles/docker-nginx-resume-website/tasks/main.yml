@@ -5,7 +5,7 @@
   file: path=/var/www state=directory
 
 - name: deploy resume web site
-  action: copy src=files/resume dest=/var/www owner=root group=root mode=0644
+  action: copy src=resume dest=/var/www owner=root group=root mode=0644
 
 - name: check nginx docker.io container status
   shell: "docker ps -a | grep 'nginx' | cat"
