@@ -12,5 +12,5 @@
   register: nginx_container_status
 
 - name: start nginx docker.io container
-  command: docker run --name nginx -v /var/www/resume:/usr/share/nginx/html:ro -d -p 80:80 nginx
+  command: docker run --name nginx -v /var/www/resume:/usr/share/nginx/html:ro -d -p 8080:80 nginx
   when: (nginx_container_status.stdout.find('Up ') == -1)

@@ -37,12 +37,13 @@
 # Forward vers et depuis Docker
 -A FORWARD -i docker0 -o eth0 -j ACCEPT
 -A FORWARD -i eth0 -o docker0 -j ACCEPT
+-A INPUT -i docker0 -j ACCEPT
+-A OUTPUT -o docker0 -j ACCEPT
 
 # Autoriser HTTP en entrée
 -A INPUT -p tcp --dport 80 -j ACCEPT
 
 # Autoriser 9091 (transmission)
--A INPUT -p tcp --dport 9091 -j ACCEPT
 -A INPUT -p tcp --dport 51413 -j ACCEPT
 -A OUTPUT -p tcp --dport 51413 -j ACCEPT
 -A INPUT -p udp --dport 51413 -j ACCEPT
