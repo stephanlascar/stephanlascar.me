@@ -1,16 +1,5 @@
-- name: create btsync directory
-  file: path=/srv/btsync
+- name: add btsync repository
+  apt_repository: repo='ppa:tuxpoldo/btsync'
 
-- name: copy btsync settings file
-  action: copy src=btsync.conf dest=/srv/btsync owner=root group=root mode=0644
-
-- name: install btsync docker.io container
-  command: docker pull shykes/bittorrentsync
-
-- name: check btsync docker.io container status
-  shell: "docker ps -a | grep 'btsync' | cat"
-  register: btsync_container_status
-
-- name: start btsync docker.io container
-  command: docker run --name btsync -p 8888:8888 -p 55555:55555 -v /srv/btsync/:/btsync/ btsync shykes/bittorrentsync
-  when: (btsync_container_status.stdout.find('Up ') == -1)
+- name: install btsync
+  apt: name=btsync state=present

@@ -49,4 +49,7 @@
 -A INPUT -p udp --dport 51413 -j ACCEPT
 -A OUTPUT -p udp --dport 51413 -j ACCEPT
 
+# Autoriser BtSync en entrée
+-A INPUT -p tcp --dport 28786 -j ACCEPT
+
 COMMIT
