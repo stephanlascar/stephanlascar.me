@@ -6,6 +6,8 @@ NameVirtualHost *:80
 
     <Directory /var/www/resume>
       Options -Indexes
-  </Directory>
+      Options -ExecCGI
+      Options -FollowSymLinks
+    </Directory>
 
 </VirtualHost>
