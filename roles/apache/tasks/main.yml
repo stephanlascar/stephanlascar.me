@@ -1,0 +1,17 @@
+- name: install Lamp server
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - apache2
+    - php5
+    - mysql-server
+    - libapache2-mod-php5
+    - php5-mysql
+
+- name: add proxy pass mod to apache
+  action: command a2enmod proxy_http
+
+- name: delete default website
+  action: command a2dissite default
+
+- name: delete default index page
+  file: name=/var/www/index.html state=absent

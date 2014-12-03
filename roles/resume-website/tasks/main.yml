@@ -1,0 +1,12 @@
+- name: create directory
+  file: path=/var/www/resume state=directory
+
+- name: deploy site
+  action: copy src=resume/ dest=/var/www/resume owner=root group=root mode=0644
+
+- name: add apache vhosts configuration
+  action: copy src=stephanlascar.me dest=/etc/apache2/sites-available owner=root group=root mode=0644
+
+- name: enable apache vhost website
+  action: command a2ensite stephanlascar.me
+  notify: reload apache

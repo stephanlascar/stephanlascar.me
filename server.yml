@@ -2,7 +2,6 @@
   sudo: yes
   roles:
     - server
-    - docker
-    - docker-nginx-resume-website
+    - apache
+    - resume-website
     - transmission
-    - btsync

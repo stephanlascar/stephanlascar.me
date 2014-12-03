@@ -1,5 +1,2 @@
 - name: reload iptables-persistent
   service: name=iptables-persistent state=restarted
-
-- name: restart haproxy
-  service: name=haproxy state=restarted

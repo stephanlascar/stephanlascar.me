@@ -1,0 +1,8 @@
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+    ServerName downloads.stephanlascar.me
+
+    ProxyPass / http://localhost:9091/
+    ProxyPassReverse / http://localhost:9091/
+</VirtualHost>

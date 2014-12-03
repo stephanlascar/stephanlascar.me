@@ -1,2 +1,0 @@
-- name: reload ufw
-  command: ufw reload

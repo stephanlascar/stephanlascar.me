@@ -1,5 +1,0 @@
-- name: add btsync repository
-  apt_repository: repo='ppa:tuxpoldo/btsync'
-
-- name: install btsync
-  apt: name=btsync state=present

@@ -27,18 +27,15 @@
 -A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
 -A OUTPUT -p tcp -m tcp --dport 443 -j ACCEPT
 
+# Autoriser l'acces au serveur de clef Ubuntu
+-A OUTPUT -p tcp -m tcp --dport 11371 -j ACCEPT
+
 # Autoriser DNS en sortie
 -A OUTPUT -p tcp -m tcp --dport 53 -j ACCEPT
 -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
 
 # Autoriser NTP en sortie
 -A OUTPUT -p udp -m udp --dport 123 -j ACCEPT
-
-# Forward vers et depuis Docker
--A FORWARD -i docker0 -o eth0 -j ACCEPT
--A FORWARD -i eth0 -o docker0 -j ACCEPT
--A INPUT -i docker0 -j ACCEPT
--A OUTPUT -o docker0 -j ACCEPT
 
 # Autoriser HTTP en entrée
 -A INPUT -p tcp --dport 80 -j ACCEPT
@@ -49,7 +46,10 @@
 -A INPUT -p udp --dport 51413 -j ACCEPT
 -A OUTPUT -p udp --dport 51413 -j ACCEPT
 
-# Autoriser BtSync en entrée
--A INPUT -p tcp --dport 28786 -j ACCEPT
+# Autoriser les trackers
+-A INPUT -p tcp --dport 56969 -j ACCEPT
+-A OUTPUT -p tcp --dport 56969 -j ACCEPT
+-A INPUT -p tcp --dport 2710 -j ACCEPT
+-A OUTPUT -p tcp --dport 2710 -j ACCEPT
 
 COMMIT

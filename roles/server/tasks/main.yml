@@ -4,16 +4,3 @@
 - name: copy the iptables file rules
   action: copy src=iptables_rules.v4 dest=/etc/iptables/rules.v4 owner=root group=root mode=0644
   notify: reload iptables-persistent
-
-- name: enable the haproxy ppa
-  apt_repository: repo="ppa:vbernat/haproxy-1.5" state=present
-
-- name: create haproxy conf directory
-  file: path=/etc/default/haproxy state=directory
-
-- name: install haproxy
-  apt: name=haproxy state=present
-
-- name: copy the haproxy config file
-  action: copy src=haproxy.cfg dest=/etc/haproxy/ owner=root group=root mode=0644
-  notify: restart haproxy

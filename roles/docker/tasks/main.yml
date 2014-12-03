@@ -1,6 +1,0 @@
-- name: change firewall forward policy to ACCEPT
-  command: sed -i 's/DEFAULT_FORWARD_POLICY="DROP"/DEFAULT_FORWARD_POLICY="ACCEPT"/g' /etc/default/ufw
-  notify: reload ufw
-
-- name: install docker.io
-  action: apt name=docker.io
