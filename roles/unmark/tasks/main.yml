@@ -1,7 +1,7 @@
 - name: install sqlite server
   action: apt pkg=sqlite3 state=installed
   
-- name: download unmark tgz
+- name: install unmark tgz
   unarchive: src=unmark-1.6.1.tar.gz dest=/var/www/unmark
   
 
