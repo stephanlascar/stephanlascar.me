@@ -11,7 +11,7 @@
   action: command a2enmod proxy_http
 
 - name: delete default website
-  action: command a2dissite default
+  action: command a2dissite 000-default
 
 - name: delete default index page
   file: name=/var/www/index.html state=absent

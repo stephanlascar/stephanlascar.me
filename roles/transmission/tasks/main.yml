@@ -19,7 +19,7 @@
   ignore_errors: true
 
 - name: add apache vhosts configuration
-  action: copy src=downloads.stephanlascar.me dest=/etc/apache2/sites-available owner=root group=root mode=0644
+  action: copy src=downloads.stephanlascar.me.conf dest=/etc/apache2/sites-available owner=root group=root mode=0644
 
 - name: enable apache vhost website
   action: command a2ensite downloads.stephanlascar.me
