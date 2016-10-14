@@ -4,9 +4,20 @@
 - name: deploy site
   action: copy src=resume/ dest=/var/www/resume owner=root group=root mode=0644
 
-- name: add apache vhosts configuration
-  action: copy src=stephanlascar.me.conf dest=/etc/apache2/sites-available owner=root group=root mode=0644
+- name: launch nginx docker container
+  docker:
+    name: nginx-resume-website
+    image: nginx
+    state: started
+    expose:
+      - 80
+    volumes:
+      - /var/www/resume:/usr/share/nginx/html:ro
 
-- name: enable apache vhost website
-  action: command a2ensite stephanlascar.me
-  notify: reload apache
+#
+# - name: add apache vhosts configuration
+#   action: copy src=stephanlascar.me.conf dest=/etc/apache2/sites-available owner=root group=root mode=0644
+#
+# - name: enable apache vhost website
+#   action: command a2ensite stephanlascar.me
+#   notify: reload apache

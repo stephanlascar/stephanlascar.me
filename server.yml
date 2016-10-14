@@ -2,7 +2,9 @@
   become: yes
   become_method: sudo
   roles:
+    - firewall
     - docker
+    - resume-website
     # - server
     # - apache
     # - resume-website

@@ -9,6 +9,9 @@
   with_items:
        - apt-transport-https
        - ca-certificates
+       - python-pip
+- command: "pip install --upgrade pip"
+- pip: name=docker-py
 
 - name: remove deprecated docker package
   apt: name=lxc-docker state=absent
@@ -36,8 +39,12 @@
 
 - name: fix DNS in docker
   lineinfile: dest=/etc/default/docker regexp="#DOCKER_OPTS=" line='DOCKER_OPTS="--dns 62.210.16.6 --dns 62.210.16.7"'
-  notify: restart docker
+  register: docker-dns
 
-- name: configure UFW’s forwarding policy
+- name: restart docker
+  when: docker-dns.changed
+  service: name=docker state=restarted
+
+- name: configure ufw's forwarding policy
   lineinfile: dest=/etc/default/ufw regexp='DEFAULT_FORWARD_POLICY="DROP"' line='DEFAULT_FORWARD_POLICY="ACCEPT"'
   notify: reload ufw

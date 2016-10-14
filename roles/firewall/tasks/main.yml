@@ -1,0 +1,18 @@
+- name: deny everything
+  ufw: policy=deny
+  notify: reload ufw
+
+- name: allow outgoing data
+  ufw: direction=outgoing policy=allow
+  notify: reload ufw
+
+- name: allow ssh input
+  ufw: rule=limit port=ssh proto=tcp
+  notify: reload ufw
+
+- name: allow dns input
+  ufw: rule=allow port=53 proto=tcp
+  notify: reload ufw
+
+- name: start ufw
+  ufw: state=enabled
