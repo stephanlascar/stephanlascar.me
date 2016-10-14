@@ -1,1 +1,1 @@
-Configuration for my web server
+Configuration for my server

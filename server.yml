@@ -1,7 +1,9 @@
 - hosts: stephanlascar.me
-  sudo: yes
+  become: yes
+  become_method: sudo
   roles:
-    - server
-    - apache
-    - resume-website
-    - transmission
+    - docker
+    # - server
+    # - apache
+    # - resume-website
+    # - transmission
